@@ -79,7 +79,7 @@ func main() {
 	if err != nil {
 		failedf("%v", errors.Wrap(err, "detecting windows version"))
 	}
-	fmt.Printf("Activating for %v version\n", version)
+	infof("Activating for %v version\n", version)
 	keylist, ok := keys[version]
 	if !ok {
 		failedf("no configured keys for %v version", version)
@@ -115,7 +115,7 @@ const (
 )
 
 func print(msg string, flag int) {
-	fmt.Printf(msg)
+	fmt.Print(msg)
 	if flag == underscore {
 		if msg[len(msg)-1] != '\n' {
 			fmt.Printf("\n")
@@ -131,9 +131,9 @@ type winVer string
 
 const (
 	enterprise winVer = "Enterprise"
-	pro               = "Pro"
-	home              = "Home"
-	unknown           = "Unknown"
+	pro        winVer = "Pro"
+	home       winVer = "Home"
+	unknown    winVer = "Unknown"
 )
 
 func version() (winVer, error) {
@@ -226,5 +226,5 @@ func failedf(format string, v ...interface{}) {
 }
 
 func infof(format string, v ...interface{}) {
-	fmt.Printf(fmt.Sprintf("[info] %v", format), v...)
+	fmt.Printf(fmt.Sprintf("[info] %v\n", format), v...)
 }
